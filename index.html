@@ -3,234 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@pekerjasaleskreatif - Dashboard Produk</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Dashboard Toko Penjual</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Pengaturan Dasar & Tema Gelap Modern */
+        /* Pengaturan Dasar */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #121212; /* Warna latar gelap elegan */
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            padding-bottom: 50px;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
         }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- Header Utama --- */
+        .top-bar {
+            background-color: #2c3e50;
+            color: white;
+            font-size: 0.85rem;
+            text-align: right;
+            padding: 5px 50px;
+        }
+        .top-bar a { margin-left: 15px; color: #ccc; }
+        .top-bar a:hover { color: white; }
+
+        .header {
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; font-style: italic; display: flex; align-items: center; gap: 10px; }
         
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
+        .search-bar {
+            display: flex;
+            width: 400px;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .search-bar input {
+            border: none;
+            padding: 10px 15px;
+            width: 100%;
+            outline: none;
+        }
+        .search-bar button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        /* Bagian Profil Header */
-        .profile-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-top: 20px;
+        .header-menu { display: flex; gap: 20px; align-items: center; font-size: 0.9rem; }
+        .header-menu i { margin-right: 5px; }
+
+        /* --- Layout Utama --- */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
-        .profile-img {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 3px solid #ff6600; /* Aksen warna Shopee/Oranye */
-            object-fit: cover;
-            box-shadow: 0 0 15px rgba(255, 102, 0, 0.4);
+
+        /* --- Navigasi Dashboard --- */
+        .dashboard-nav-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
         }
-        .username {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 10px 0 5px 0;
+        .dashboard-nav-header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
         }
-        .bio {
-            font-size: 0.9rem;
-            color: #aaaaaa;
+        .dashboard-nav {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px 20px;
+            gap: 20px;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            color: #555;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .nav-item:hover, .nav-item.active {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+        }
+        .nav-item i { font-size: 1.1rem; }
+        
+        /* Warna ikon spesifik seperti di gambar */
+        .ic-beranda { color: #2ecc71; }
+        .ic-laporan { color: #34495e; }
+        .ic-wishlist { color: #e74c3c; }
+        .ic-riwayat { color: #e67e22; }
+        .ic-produk { color: #1abc9c; }
+        .ic-profil { color: #16a085; }
+
+        /* --- Layout Grid (Kiri & Kanan) --- */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        /* Panel Box Styling */
+        .panel {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow: hidden;
             margin-bottom: 20px;
         }
-
-        /* Tombol Media Sosial */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background-color: #1e1e1e;
-            color: #ffffff;
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-        .social-btn:hover {
-            transform: translateY(-3px);
-            background-color: #ff6600;
+        .panel-header {
+            background-color: #2c3e50;
             color: white;
-        }
-        .wa-btn { color: #25D366; }
-        .ig-btn { color: #E1306C; }
-        .fb-btn { color: #1877F2; }
-        .tt-btn { color: #ffffff; }
-
-        /* Kategori Produk */
-        .category-section {
-            margin-bottom: 35px;
-        }
-        .category-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            padding-left: 10px;
-            border-left: 4px solid #ff6600;
+            padding: 12px 20px;
+            font-weight: bold;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
         }
 
-        /* Grid Produk (Kotak-kotak) */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Membagi jadi 2 kolom */
-            gap: 15px;
-        }
-        .product-card {
-            background-color: #1e1e1e;
-            border-radius: 12px;
-            overflow: hidden;
-            text-decoration: none;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .product-card:hover {
-            transform: scale(1.03);
-            border: 1px solid #ff6600;
-        }
-        .product-img {
-            width: 100%;
-            aspect-ratio: 1 / 1; /* Membuat gambar persegi presisi */
-            object-fit: cover;
-        }
-        .product-info {
-            padding: 10px;
-            text-align: center;
-        }
-        .product-name {
+        /* --- Kolom Kiri: Daftar Produk --- */
+        .btn-tambah {
+            background-color: white;
+            color: #2c3e50;
+            padding: 6px 12px;
+            border-radius: 4px;
             font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
         }
-        .btn-beli {
-            display: inline-block;
-            background-color: #ff6600;
+        
+        .product-list { display: flex; flex-direction: column; }
+        .product-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .product-item:nth-child(even) { background-color: #fff9fa; } /* Warna belang-belang tipis */
+        
+        .product-info-col {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 40%;
+        }
+        .product-info-col img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .product-name { color: #3498db; font-weight: 500; font-size: 0.95rem; }
+        .badge { background: #1abc9c; color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.7rem; }
+        
+        .product-status { color: #7f8c8d; font-size: 0.9rem; width: 20%; text-align: center; }
+        
+        .product-actions { display: flex; gap: 10px; align-items: center; }
+        .btn-promote {
+            background-color: #7f8c8d; color: white; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; border: none;
+        }
+        .action-icon { cursor: pointer; color: #95a5a6; transition: 0.2s; }
+        .action-icon:hover { color: #3498db; }
+        .icon-edit { color: #3498db; }
+        .icon-view { color: #9b59b6; }
+        .icon-delete { color: #e74c3c; }
+
+        /* Pagination */
+        .pagination { padding: 15px 20px; display: flex; gap: 5px; }
+        .pagination span { padding: 5px 12px; border: 1px solid #ddd; cursor: pointer; border-radius: 3px; }
+        .pagination span.active { background: #3498db; color: white; border-color: #3498db; }
+
+        /* --- Kolom Kanan: Profil & Produk Populer --- */
+        .store-profile { text-align: center; }
+        .store-cover { width: 100%; height: 250px; object-fit: cover; }
+        .store-name-bar { background-color: #2c3e50; color: white; padding: 10px; font-weight: bold; }
+        .store-details { padding: 20px; font-size: 0.9rem; color: #555; }
+        .store-details i { color: #7f8c8d; margin-right: 5px; }
+        
+        .popular-list { display: flex; flex-direction: column; }
+        .popular-item { padding: 12px 20px; border-bottom: 1px solid #eee; font-size: 0.9rem; color: #3498db; font-weight: 500; }
+
+        /* Floating Chat Button */
+        .floating-chat {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #ff4757;
             color: white;
-            font-size: 0.75rem;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            margin-top: 5px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 10px rgba(255, 71, 87, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Responsif untuk Layar HP */
+        @media (max-width: 768px) {
+            .header { flex-direction: column; gap: 15px; padding: 15px; }
+            .search-bar { width: 100%; }
+            .main-content { grid-template-columns: 1fr; }
+            .product-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .product-info-col, .product-status, .product-actions { width: 100%; text-align: left; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    
-    <div class="profile-header">
-        <img src="https://via.placeholder.com/150" alt="Profil" class="profile-img">
-        <h1 class="username">@pekerjasaleskreatif</h1>
-        <p class="bio">Inspirasi Gaya & Kebutuhan Harian Anda</p>
+    <div class="top-bar">
+        <a href="#">Hijab</a>
+        <a href="#">Aksesoris</a>
+        <a href="#">Tracking</a>
+        <a href="#">Blog</a>
+        <a href="#">Tas</a>
+        <a href="#">Sandal</a>
     </div>
 
-    <div class="social-links">
-        <a href="https://wa.me/6281234567890" class="social-btn wa-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://instagram.com/username_anda" class="social-btn ig-btn" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://facebook.com/username_anda" class="social-btn fb-btn" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://tiktok.com/@username_anda" class="social-btn tt-btn" target="_blank"><i class="fab fa-tiktok"></i></a>
-    </div>
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-bolt"></i> MP VELOCITY
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Cari Produk...">
+            <button><i class="fas fa-search"></i> CARI</button>
+        </div>
+        <div class="header-menu">
+            <a href="#"><i class="fas fa-plus"></i> Jual Barang</a>
+            <a href="#"><i class="fas fa-user"></i> Profile</a>
+            <a href="#"><i class="fas fa-shopping-cart"></i> 4</a>
+            <a href="#"><i class="fas fa-bell"></i> 65</a>
+        </div>
+    </header>
 
-    <div class="category-section">
-        <div class="category-title"><i class="fas fa-tshirt"></i> Produk Baju</div>
-        <div class="product-grid">
+    <div class="container">
+        
+        <div class="dashboard-nav-container">
+            <div class="dashboard-nav-header">
+                Dashboard Toko Velocity
+            </div>
+            <div class="dashboard-nav">
+                <a href="#" class="nav-item"><i class="fas fa-home ic-beranda"></i> Beranda</a>
+                <a href="#" class="nav-item"><i class="fas fa-chart-bar ic-laporan"></i> Laporan</a>
+                <a href="#" class="nav-item"><i class="fas fa-heart ic-wishlist"></i> Wishlist</a>
+                <a href="#" class="nav-item"><i class="fas fa-list-alt ic-riwayat"></i> Riwayat Belanja</a>
+                <a href="#" class="nav-item active"><i class="fas fa-plus-circle ic-produk"></i> Produk</a>
+                <a href="#" class="nav-item"><i class="fas fa-cog ic-profil"></i> Profil <i class="fas fa-caret-down" style="font-size: 0.8rem;"></i></a>
+            </div>
+        </div>
+
+        <div class="main-content">
             
-            <a href="LINK_SHOPEE_DISINI" class="product-card" target="_blank">
-                <img src="https://via.placeholder.com/300?text=Foto+Baju+1" alt="Baju 1" class="product-img">
-                <div class="product-info">
-                    <div class="product-name">Kemeja Pria Kasual</div>
-                    <div class="btn-beli">Beli di Shopee</div>
-                </div>
-            </a>
+            <div class="left-column">
+                <div class="panel">
+                    <div class="panel-header">
+                        <span><i class="fas fa-eye"></i> Produk</span>
+                        <button class="btn-tambah"><i class="fas fa-plus"></i> Tambah Produk</button>
+                    </div>
+                    
+                    <div class="product-list">
+                        <div class="product-item">
+                            <div class="product-info-col">
+                                <img src="https://via.placeholder.com/50" alt="Produk">
+                                <div>
+                                    <span class="product-name">Kemeja Pria Kasual</span>
+                                    <span class="badge">130</span>
+                                </div>
+                            </div>
+                            <div class="product-status">publish</div>
+                            <div class="product-actions">
+                                <button class="btn-promote"><i class="fas fa-bullhorn"></i> Promote</button>
+                                <i class="fas fa-pencil-alt action-icon icon-edit"></i>
+                                <i class="fas fa-eye action-icon icon-view"></i>
+                                <i class="fas fa-trash action-icon icon-delete"></i>
+                            </div>
+                        </div>
 
-            <a href="LINK_SHOPEE_DISINI" class="product-card" target="_blank">
-                <img src="https://via.placeholder.com/300?text=Foto+Baju+2" alt="Baju 2" class="product-img">
-                <div class="product-info">
-                    <div class="product-name">Jaket Streetwear</div>
-                    <div class="btn-beli">Beli di Shopee</div>
+                        <div class="product-item">
+                            <div class="product-info-col">
+                                <img src="https://via.placeholder.com/50" alt="Produk">
+                                <div>
+                                    <span class="product-name">Jaket Streetwear</span>
+                                    <span class="badge">170</span>
+                                </div>
+                            </div>
+                            <div class="product-status">publish</div>
+                            <div class="product-actions">
+                                <button class="btn-promote"><i class="fas fa-bullhorn"></i> Promote</button>
+                                <i class="fas fa-pencil-alt action-icon icon-edit"></i>
+                                <i class="fas fa-eye action-icon icon-view"></i>
+                                <i class="fas fa-trash action-icon icon-delete"></i>
+                            </div>
+                        </div>
+
+                        <div class="product-item">
+                            <div class="product-info-col">
+                                <img src="https://via.placeholder.com/50" alt="Produk">
+                                <div>
+                                    <span class="product-name">Sepatu Sneakers Putih</span>
+                                    <span class="badge">402</span>
+                                </div>
+                            </div>
+                            <div class="product-status">publish</div>
+                            <div class="product-actions">
+                                <button class="btn-promote"><i class="fas fa-bullhorn"></i> Promote</button>
+                                <i class="fas fa-pencil-alt action-icon icon-edit"></i>
+                                <i class="fas fa-eye action-icon icon-view"></i>
+                                <i class="fas fa-trash action-icon icon-delete"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pagination">
+                        <span class="active">1</span>
+                        <span>2</span>
+                        <span>&raquo;</span>
+                    </div>
                 </div>
-            </a>
+            </div>
+
+            <div class="right-column">
+                
+                <div class="panel store-profile">
+                    <img src="https://via.placeholder.com/400x300?text=Foto+Toko" alt="Cover Toko" class="store-cover">
+                    <div class="store-name-bar">Toko @pekerjasaleskreatif</div>
+                    <div class="store-details">
+                        <p><i class="fas fa-map-marker-alt"></i> Langsa, Aceh</p>
+                        <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                        <p>Menjual kebutuhan fashion pria dan olahraga terlengkap dan termurah. Baca deskripsi lengkap.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <span><i class="fas fa-eye"></i> Produk Populer</span>
+                    </div>
+                    <div class="popular-list">
+                        <div class="popular-item">Sepatu Sneakers Putih <span class="badge" style="float: right;">402</span></div>
+                        <div class="popular-item">Jaket Streetwear <span class="badge" style="float: right;">211</span></div>
+                        <div class="popular-item">Kemeja Pria Kasual <span class="badge" style="float: right;">130</span></div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
     </div>
 
-    <div class="category-section">
-        <div class="category-title"><i class="fas fa-running"></i> Olahraga Pria</div>
-        <div class="product-grid">
-            
-            <a href="LINK_SHOPEE_DISINI" class="product-card" target="_blank">
-                <img src="https://via.placeholder.com/300?text=Foto+Olahraga+1" alt="Olahraga 1" class="product-img">
-                <div class="product-info">
-                    <div class="product-name">Sepatu Lari</div>
-                    <div class="btn-beli">Beli di Shopee</div>
-                </div>
-            </a>
-
-            <a href="LINK_SHOPEE_DISINI" class="product-card" target="_blank">
-                <img src="https://via.placeholder.com/300?text=Foto+Olahraga+2" alt="Olahraga 2" class="product-img">
-                <div class="product-info">
-                    <div class="product-name">Baju Jersey DryFit</div>
-                    <div class="btn-beli">Beli di Shopee</div>
-                </div>
-            </a>
-
-        </div>
+    <div class="floating-chat">
+        <i class="fas fa-comment-dots"></i>
     </div>
-
-    <div class="category-section">
-        <div class="category-title"><i class="fas fa-heartbeat"></i> Produk Kesehatan</div>
-        <div class="product-grid">
-            
-            <a href="LINK_SHOPEE_DISINI" class="product-card" target="_blank">
-                <img src="https://via.placeholder.com/300?text=Foto+Sehat+1" alt="Kesehatan 1" class="product-img">
-                <div class="product-info">
-                    <div class="product-name">Vitamin C 1000mg</div>
-                    <div class="btn-beli">Beli di Shopee</div>
-                </div>
-            </a>
-
-            <a href="LINK_SHOPEE_DISINI" class="product-card" target="_blank">
-                <img src="https://via.placeholder.com/300?text=Foto+Sehat+2" alt="Kesehatan 2" class="product-img">
-                <div class="product-info">
-                    <div class="product-name">Masker Medis</div>
-                    <div class="btn-beli">Beli di Shopee</div>
-                </div>
-            </a>
-
-        </div>
-    </div>
-
-</div>
 
 </body>
 </html>
